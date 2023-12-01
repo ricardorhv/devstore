@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+  <img src="./.github/logo.svg">
+</p>
 
-## Getting Started
+<hr>
 
-First, run the development server:
+<h1 align="center">Application to learn about the App Router in NextJS</h1>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<h2 align="center">⚠️ In progress... ⚠️</h2>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img src="./.github/cover.png">
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<!-- ---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🎥 Preview
 
-## Learn More
+### A little about the project 💻
 
-To learn more about Next.js, take a look at the following resources:
+<img src='./github/tour.gif'/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🚀 I went beyond the challenge
+I did more than was requested to me
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- ✔️ I did `something`
+
+<br>
+
+---
+
+## 📚 Learning
+All the things that I learned and practiced with this project
+
+- I learn `something` to do something
+
+<br>
+
+---
+
+## 🧪 Technologies
+
+This project was developed using de following technologies:
+
+- [Tech](link)
+- [Tech](link)
+
+<br>
+
+--- -->
+
+## 🔖 Layout
+
+You can view the project layout through the links below:
+
+- [Layout](https://www.figma.com/community/file/1299037596397442545)
+
+Remembering that you need to have a [Figma](http://figma.com/) account to access it.
+
+<br>
+
+---
+
+Developed by [ricardorhv](https://github.com/ricardorhv) 🖤
