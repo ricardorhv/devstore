@@ -1,4 +1,5 @@
 import AddToCartButton from '@/components/add-to-cart-button'
+import { ShirtSizesChooser } from '@/components/shirt-sizes-chooser'
 import { api } from '@/data/api'
 import { Product } from '@/data/types/product'
 import { Metadata } from 'next'
@@ -83,37 +84,7 @@ export default async function ProductPage({ params }: ProductProps) {
         </div>
 
         <div className="mt-8 space-y-4">
-          <span className="block font-semibold">Tamanhos</span>
-
-          <div className="flex gap-2">
-            <button
-              type="button"
-              className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold"
-            >
-              P
-            </button>
-
-            <button
-              type="button"
-              className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold"
-            >
-              M
-            </button>
-
-            <button
-              type="button"
-              className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold"
-            >
-              G
-            </button>
-
-            <button
-              type="button"
-              className="flex h-9 w-14 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 text-sm font-semibold"
-            >
-              GG
-            </button>
-          </div>
+          <ShirtSizesChooser />
         </div>
 
         <AddToCartButton productId={product.id} />
