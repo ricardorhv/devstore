@@ -35,41 +35,80 @@ export default function CartWidget() {
             </Dialog.Close>
           </header>
 
-          <section className="border-y border-white h-[500px] divide-y divide-zinc-700 ">
-            <div className="grid grid-cols-[140px_1fr] gap-3 py-8 items-center">
-              <Image
-                src={'/moletom-ai-side.png'}
-                alt=""
-                width={140}
-                height={140}
-              />
+          <hr className="rounded-full mt-5 mb-8" />
 
-              <div className="flex flex-col gap-3">
-                <span className="text-lg font-bold text-white">
-                  Moletom AI Side
+          <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
+            {items.map((item, index) => {
+              let styleToBeAdded = ''
+
+              if (index === 0) {
+                styleToBeAdded = 'pb-8'
+              } else if (index === items.length - 1) {
+                styleToBeAdded = 'pt-8'
+              } else {
+                styleToBeAdded = 'py-8'
+              }
+
+              return (
+                <div
+                  className={`grid grid-cols-[140px_1fr] gap-3 items-center ${styleToBeAdded}`}
+                  key={item.productId}
+                >
+                  <Image
+                    src={'/moletom-ai-side.png'}
+                    alt=""
+                    width={140}
+                    height={140}
+                  />
+
+                  <div className="flex flex-col gap-3">
+                    <span className="text-lg font-bold text-white">
+                      Moletom AI Side
+                    </span>
+
+                    <div>
+                      <ShirtSizesChooser index={index} preChosenShirtSize="M" />
+                    </div>
+
+                    <div className="flex justify-between items-center mr-5">
+                      <span className="inline-block rounded-full bg-violet-500 px-5 py-2.5 font-semibold">
+                        {Number(129).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                          maximumFractionDigits: 0,
+                          minimumFractionDigits: 0,
+                        })}
+                      </span>
+
+                      <button className="bg-transparent text-red-700 hover:text-red-900 transition-colors border-none outline-none">
+                        <Trash2 size={24} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </section>
+
+          <hr className="rounded-full my-8" />
+
+          <footer>
+            <div className="flex items-center justify-between my-8">
+              <span className="text-zinc-400 text-lg font-bold">Total</span>
+              <div className="text-center">
+                <span className="block text-white font-bold text-xl">
+                  R$ 519,00
                 </span>
-
-                <div>
-                  <ShirtSizesChooser preChosenShirtSize="M" />
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="inline-block rounded-full bg-violet-500 px-5 py-2.5 font-semibold">
-                    {Number(129).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      maximumFractionDigits: 0,
-                      minimumFractionDigits: 0,
-                    })}
-                  </span>
-
-                  <button className="bg-transparent text-red-700 hover:text-red-900 transition-colors border-none outline-none">
-                    <Trash2 size={24} />
-                  </button>
-                </div>
+                <span className="text-zinc-400 text-sm">
+                  Em 12x s/juros de R$43,50
+                </span>
               </div>
             </div>
-          </section>
+
+            <button className="flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white w-full">
+              Finalizar compra
+            </button>
+          </footer>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -84,7 +84,7 @@ export default async function ProductPage({ params }: ProductProps) {
         </div>
 
         <div className="mt-8 space-y-4">
-          <ShirtSizesChooser />
+          <ShirtSizesChooser index={-2} />
         </div>
 
         <AddToCartButton productId={product.id} />

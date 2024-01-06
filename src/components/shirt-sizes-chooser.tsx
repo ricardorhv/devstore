@@ -6,10 +6,12 @@ type ShirtSizesType = 'P' | 'M' | 'G' | 'GG'
 
 interface ShirtSizesChooserProps {
   preChosenShirtSize?: ShirtSizesType
+  index: number
 }
 
 export function ShirtSizesChooser({
   preChosenShirtSize,
+  index,
 }: ShirtSizesChooserProps) {
   const [shirtSize, setShirtSize] = useState<ShirtSizesType | ''>(
     preChosenShirtSize || '',
@@ -23,11 +25,7 @@ export function ShirtSizesChooser({
   }
 
   function formatRadioButtonId(size: ShirtSizesType) {
-    const locationRenderedComponent = preChosenShirtSize
-      ? 'cartShirtSize'
-      : 'shirtSize'
-
-    return `${locationRenderedComponent}${size}`
+    return `${size}${index}`
   }
 
   return (
