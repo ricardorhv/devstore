@@ -54,12 +54,19 @@ export default function CartWidget() {
                   className={`grid grid-cols-[140px_1fr] gap-3 items-center ${styleToBeAdded}`}
                   key={item.productId}
                 >
-                  <Image
-                    src={'/moletom-ai-side.png'}
-                    alt=""
-                    width={140}
-                    height={140}
-                  />
+                  <div className="relative">
+                    <Image
+                      src={'/moletom-ai-side.png'}
+                      alt=""
+                      width={140}
+                      height={140}
+                    />
+                    {item.quantity > 1 && (
+                      <div className="absolute bg-emerald-500 text-white text-sm font-semibold w-8 h-8 rounded-full flex items-center justify-center right-9 bottom-[-8px]">
+                        <span>{item.quantity}x</span>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="flex flex-col gap-3">
                     <span className="text-lg font-bold text-white">
