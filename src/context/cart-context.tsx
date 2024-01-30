@@ -1,15 +1,20 @@
 'use client'
 
+import { Product } from '@/data/types/product'
+import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 import { ReactNode, createContext, useContext, useState } from 'react'
 
-interface CartItem {
-  productId: number
+interface ProductCart extends Product {
+  shirtSize: ShirtSizesType
+}
+
+interface CartItem extends ProductCart {
   quantity: number
 }
 
 interface CartContextType {
   items: CartItem[]
-  addToCart: (productId: number) => void
+  addToCart: (product: ProductCart) => void
 }
 
 interface CartProviderProps {
@@ -21,15 +26,13 @@ const CartContext = createContext({} as CartContextType)
 export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
 
-  function addToCart(productId: number) {
+  function addToCart(product: ProductCart) {
     setCartItems((prevState) => {
-      const productInCart = prevState.some(
-        (item) => item.productId === productId,
-      )
+      const productInCart = prevState.some((item) => item.id === product.id)
 
       if (productInCart) {
         return prevState.map((item) => {
-          if (item.productId === productId) {
+          if (item.id === product.id) {
             return {
               ...item,
               quantity: item.quantity + 1,
@@ -42,7 +45,7 @@ export function CartProvider({ children }: CartProviderProps) {
         return [
           ...prevState,
           {
-            productId,
+            ...product,
             quantity: 1,
           },
         ]

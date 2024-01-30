@@ -2,6 +2,8 @@
 import { FormEvent, useState } from 'react'
 import { ShirtSizesChooser } from './shirt-sizes-chooser'
 import { useCart } from '@/context/cart-context'
+import { Product } from '@/data/types/product'
+import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 
 interface FormDataType {
   shirtSize?: {
@@ -10,23 +12,26 @@ interface FormDataType {
 }
 
 interface AddToCartFormProps {
-  productId: number
+  product: Product
 }
 
-export function AddToCartForm({ productId }: AddToCartFormProps) {
+export function AddToCartForm({ product }: AddToCartFormProps) {
   const [isShirtSizeNotChoose, setIsShirtSizeNotChoose] = useState(false)
   const { addToCart } = useCart()
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = event.target as FormDataType
-    const shirtSize = formData.shirtSize?.value
+    const shirtSize = formData.shirtSize?.value as ShirtSizesType
 
     if (shirtSize?.length === 0) {
       setIsShirtSizeNotChoose(true)
     } else {
       setIsShirtSizeNotChoose(false)
-      addToCart(productId)
+      addToCart({
+        ...product,
+        shirtSize,
+      })
     }
   }
 

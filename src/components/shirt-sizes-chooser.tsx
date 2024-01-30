@@ -1,7 +1,6 @@
+import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { useState } from 'react'
-
-type ShirtSizesType = 'P' | 'M' | 'G' | 'GG'
 
 interface ShirtSizesChooserProps {
   preChosenShirtSize?: ShirtSizesType
