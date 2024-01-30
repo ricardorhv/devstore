@@ -31,6 +31,7 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
       addToCart({
         ...product,
         shirtSize,
+        quantity: 1,
       })
     }
   }

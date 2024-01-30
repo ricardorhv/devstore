@@ -1,20 +1,14 @@
 'use client'
 
 import { Product } from '@/data/types/product'
+import { ProductCart } from '@/data/types/product-cart'
 import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 import { ReactNode, createContext, useContext, useState } from 'react'
 
-interface ProductCart extends Product {
-  shirtSize: ShirtSizesType
-}
-
-interface CartItem extends ProductCart {
-  quantity: number
-}
-
 interface CartContextType {
-  items: CartItem[]
+  items: ProductCart[]
   addToCart: (product: ProductCart) => void
+  removeItemFromCart: (productId: number) => void
 }
 
 interface CartProviderProps {
@@ -24,7 +18,7 @@ interface CartProviderProps {
 const CartContext = createContext({} as CartContextType)
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [cartItems, setCartItems] = useState<ProductCart[]>([])
 
   function addToCart(product: ProductCart) {
     setCartItems((prevState) => {
@@ -46,15 +40,22 @@ export function CartProvider({ children }: CartProviderProps) {
           ...prevState,
           {
             ...product,
-            quantity: 1,
           },
         ]
       }
     })
   }
 
+  function removeItemFromCart(productId: number) {
+    setCartItems((prevState) => {
+      return prevState.filter((item) => item.id !== productId)
+    })
+  }
+
   return (
-    <CartContext.Provider value={{ items: cartItems, addToCart }}>
+    <CartContext.Provider
+      value={{ items: cartItems, addToCart, removeItemFromCart }}
+    >
       {children}
     </CartContext.Provider>
   )
