@@ -1,4 +1,5 @@
 import AddToCartButton from '@/components/add-to-cart-button'
+import { AddToCartForm } from '@/components/add-to-cart-form'
 import { ShirtSizesChooser } from '@/components/shirt-sizes-chooser'
 import { api } from '@/data/api'
 import { Product } from '@/data/types/product'
@@ -83,11 +84,7 @@ export default async function ProductPage({ params }: ProductProps) {
           </span>
         </div>
 
-        <div className="mt-8 space-y-4">
-          <ShirtSizesChooser index={-2} />
-        </div>
-
-        <AddToCartButton productId={product.id} />
+        <AddToCartForm productId={product.id} />
       </div>
     </div>
   )
