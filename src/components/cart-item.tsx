@@ -1,5 +1,4 @@
 import { useCart } from '@/context/cart-context'
-import { Product } from '@/data/types/product'
 import { ProductCart } from '@/data/types/product-cart'
 import { Trash2 } from 'lucide-react'
 import Image from 'next/image'
@@ -51,7 +50,7 @@ export function CarItem({ item, index }: CartItemProps) {
 
         <div className="flex justify-between items-center mr-5">
           <span className="inline-block rounded-full bg-violet-500 px-5 py-2.5 font-semibold">
-            {Number(item.price).toLocaleString('pt-BR', {
+            {Number(item.subtotal).toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
               maximumFractionDigits: 0,

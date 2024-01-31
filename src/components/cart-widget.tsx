@@ -6,7 +6,7 @@ import { ShoppingBag, X } from 'lucide-react'
 import { CarItem } from './cart-item'
 
 export default function CartWidget() {
-  const { items } = useCart()
+  const { items, cart } = useCart()
 
   const quantityOfItemsInCart = items.length
 
@@ -36,31 +36,52 @@ export default function CartWidget() {
 
           <hr className="rounded-full mt-5 mb-8" />
 
-          <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
-            {items.map((item, index) => {
-              return <CarItem item={item} index={index} key={item.id} />
-            })}
-          </section>
-
-          <hr className="rounded-full my-8" />
-
-          <footer>
-            <div className="flex items-center justify-between my-8">
-              <span className="text-zinc-400 text-lg font-bold">Total</span>
-              <div className="text-center">
-                <span className="block text-white font-bold text-xl">
-                  R$ 519,00
+          <form className="h-full">
+            {items.length === 0 ? (
+              <section className="w-full h-full flex flex-col items-center justify-center gap-5">
+                <span className="font-bold text-2xl text-zinc-500 mb-16">
+                  Seu carrinho está vazio!
                 </span>
-                <span className="text-zinc-400 text-sm">
-                  Em 12x s/juros de R$43,50
-                </span>
-              </div>
-            </div>
+              </section>
+            ) : (
+              <>
+                <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
+                  {items.map((item, index) => {
+                    return <CarItem item={item} index={index} key={item.id} />
+                  })}
+                </section>
 
-            <button className="flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white w-full">
-              Finalizar compra
-            </button>
-          </footer>
+                <hr className="rounded-full my-8" />
+
+                <footer>
+                  <div className="flex items-center justify-between my-8">
+                    <span className="text-zinc-400 text-lg font-bold">
+                      Total
+                    </span>
+                    <div className="text-center">
+                      <span className="block text-white font-bold text-xl">
+                        {Number(cart.total).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </span>
+                      <span className="text-zinc-400 text-sm">
+                        Em 12x s/juros de{' '}
+                        {Number(cart.total / 12).toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        })}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button className="flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white w-full">
+                    Finalizar compra
+                  </button>
+                </footer>
+              </>
+            )}
+          </form>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
