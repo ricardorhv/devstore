@@ -1,6 +1,7 @@
 'use client'
 
 import { ProductCart } from '@/data/types/product-cart'
+import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 import {
   ReactNode,
   createContext,
@@ -19,6 +20,11 @@ interface CartContextType {
   cart: Cart
   addToCart: (product: ProductCart) => void
   removeItemFromCart: (productId: number) => void
+  changeShirtSize: (
+    productId: number,
+    preChoosenSize: string,
+    newSize: ShirtSizesType,
+  ) => void
 }
 
 interface CartProviderProps {
@@ -40,7 +46,10 @@ export function CartProvider({ children }: CartProviderProps) {
 
   function addToCart(product: ProductCart) {
     setCartItems((prevState) => {
-      const productInCart = prevState.some((item) => item.id === product.id)
+      const productInCart = prevState.some(
+        (item) =>
+          item.id === product.id && item.shirtSize === product.shirtSize,
+      )
 
       if (productInCart) {
         return prevState.map((item) => {
@@ -75,9 +84,34 @@ export function CartProvider({ children }: CartProviderProps) {
     })
   }
 
+  function changeShirtSize(
+    productId: number,
+    preChosenSize: string,
+    newSize: ShirtSizesType,
+  ) {
+    setCartItems((prevState) => {
+      return prevState.map((item) => {
+        if (item.id === productId && item.shirtSize === preChosenSize) {
+          return {
+            ...item,
+            shirtSize: newSize,
+          }
+        }
+
+        return item
+      })
+    })
+  }
+
   return (
     <CartContext.Provider
-      value={{ items: cartItems, addToCart, removeItemFromCart, cart }}
+      value={{
+        items: cartItems,
+        addToCart,
+        removeItemFromCart,
+        cart,
+        changeShirtSize,
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -47,7 +47,13 @@ export default function CartWidget() {
               <>
                 <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
                   {items.map((item, index) => {
-                    return <CarItem item={item} index={index} key={item.id} />
+                    return (
+                      <CarItem
+                        item={item}
+                        index={index}
+                        key={`${item.id}${index}${item.quantity}`}
+                      />
+                    )
                   })}
                 </section>
 

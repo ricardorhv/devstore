@@ -8,4 +8,9 @@ STAGE 2
 [X] Se não tiver nenhum item no carrinho, exibir uma mensagem avisando
 [X] Encapsular o carrinho em um form
 [X] Exibir preço dos produtos de acordo com a quantidade de items (price \* quantity)
-[] Exibir o preço total da compra e mostrar o preço parcelado
+[X] Exibir o preço total da compra e mostrar o preço parcelado
+
+STAGE 3
+[X] Um item será considerado o mesmo se o ID e o tamanho for os mesmos
+[X] Permitir alterar o tamanho da camiseta pelo carrinho
+[] Alterar os testes

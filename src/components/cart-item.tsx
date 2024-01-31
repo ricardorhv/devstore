@@ -45,6 +45,7 @@ export function CarItem({ item, index }: CartItemProps) {
           <ShirtSizesChooser
             index={index}
             preChosenShirtSize={item.shirtSize}
+            productId={item.id}
           />
         </div>
 

@@ -1,15 +1,18 @@
+import { useCart } from '@/context/cart-context'
 import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 import * as RadioGroup from '@radix-ui/react-radio-group'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ShirtSizesChooserProps {
   preChosenShirtSize?: ShirtSizesType
+  productId?: number
   index: number
 }
 
 export function ShirtSizesChooser({
   preChosenShirtSize,
   index,
+  productId,
 }: ShirtSizesChooserProps) {
   const [shirtSize, setShirtSize] = useState<ShirtSizesType | ''>(
     preChosenShirtSize || '',
@@ -17,6 +20,20 @@ export function ShirtSizesChooser({
   const isAnyRadioButtonChecked = shirtSize.length !== 0
   const styleToLowOpacity =
     'has-[button[data-is-any-radio-checked=true]]:opacity-40'
+
+  const { changeShirtSize } = useCart()
+
+  useEffect(() => {
+    if (preChosenShirtSize && productId) {
+      if (preChosenShirtSize !== shirtSize) {
+        changeShirtSize(
+          productId,
+          preChosenShirtSize,
+          shirtSize as ShirtSizesType,
+        )
+      }
+    }
+  }, [shirtSize, preChosenShirtSize])
 
   function handleChangeShirtSize(newShirtSize: ShirtSizesType) {
     setShirtSize(newShirtSize)
