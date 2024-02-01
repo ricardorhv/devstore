@@ -23,6 +23,19 @@ describe('add product to cart', () => {
     cy.contains('Cart (1)').should('exist')
   })
 
+  it('should not consider a product with a different size as the same product added already into the cart', () => {
+    cy.get('a[href^="/product"]').first().click()
+
+    cy.location('pathname').should('include', '/product')
+    cy.get('label[for="P-2"]').click()
+    cy.contains('Adicionar ao carrinho').click()
+
+    cy.get('label[for="P-2"]').click()
+    cy.contains('Adicionar ao carrinho').click()
+
+    cy.contains('Cart (1)').should('exist')
+  })
+
   it('should be able to search for a product and add it to the cart', () => {
     cy.searchByQuery('moletom')
 
