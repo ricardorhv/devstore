@@ -30,10 +30,10 @@ describe('add product to cart', () => {
     cy.get('label[for="P-2"]').click()
     cy.contains('Adicionar ao carrinho').click()
 
-    cy.get('label[for="P-2"]').click()
+    cy.get('label[for="M-2"]').click()
     cy.contains('Adicionar ao carrinho').click()
 
-    cy.contains('Cart (1)').should('exist')
+    cy.contains('Cart (2)').should('exist')
   })
 
   it('should be able to search for a product and add it to the cart', () => {
