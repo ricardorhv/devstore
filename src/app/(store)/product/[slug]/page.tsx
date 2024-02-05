@@ -47,6 +47,34 @@ export async function generateStaticParams() {
 export default async function ProductPage({ params }: ProductProps) {
   const product = await getProduct(params.slug)
 
+  // const result = await api('/orders', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     cartItems: [
+  //       {
+  //         id: 1,
+  //         title: 'produto',
+  //         slug: 'slug',
+  //         price: 100,
+  //         image: 'imagem url',
+  //         description: 'Descrição',
+  //         featured: true,
+  //         shirtSize: 'P',
+  //         quantity: 1,
+  //         subtotal: 100,
+  //       },
+  //     ],
+  //     total: 100,
+  //   }),
+  // })
+
+  // const orders = await result.json()
+
+  // console.log(orders)
+
   return (
     <div className="relative grid max-h-[860px] grid-cols-3">
       <div className="col-span-2 overflow-hidden">
@@ -87,5 +115,6 @@ export default async function ProductPage({ params }: ProductProps) {
         <AddToCartForm product={product} />
       </div>
     </div>
+    // <pre>{JSON.stringify(orders, null, 2)}</pre>
   )
 }

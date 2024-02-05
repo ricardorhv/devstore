@@ -13,4 +13,7 @@ STAGE 2
 STAGE 3
 [X] Um item será considerado o mesmo se o ID e o tamanho for os mesmos
 [X] Permitir alterar o tamanho da camiseta pelo carrinho
-[] Alterar os testes
+[X] Alterar os testes
+
+STAGE 4
+[] Buscar uma forma de acessar os dados pelo server components para enviar para a API. Caso não seja encontrada uma solução, deixar de lado e finalizar o projeto!

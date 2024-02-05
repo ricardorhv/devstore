@@ -4,11 +4,18 @@ import { useCart } from '@/context/cart-context'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ShoppingBag, X } from 'lucide-react'
 import { CarItem } from './cart-item'
+import { finishOrder } from '@/data/orders'
 
 export default function CartWidget() {
   const { items, cart } = useCart()
 
   const quantityOfItemsInCart = items.length
+
+  async function handleFinishOrder() {
+    const result = await finishOrder(cart)
+
+    console.log(result)
+  }
 
   return (
     <Dialog.Root>
@@ -36,58 +43,57 @@ export default function CartWidget() {
 
           <hr className="rounded-full mt-5 mb-8" />
 
-          <form className="h-full">
-            {items.length === 0 ? (
-              <section className="w-full h-full flex flex-col items-center justify-center gap-5">
-                <span className="font-bold text-2xl text-zinc-500 mb-16">
-                  Seu carrinho está vazio!
-                </span>
+          {items.length === 0 ? (
+            <section className="w-full h-full flex flex-col items-center justify-center gap-5">
+              <span className="font-bold text-2xl text-zinc-500 mb-16">
+                Seu carrinho está vazio!
+              </span>
+            </section>
+          ) : (
+            <>
+              <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
+                {items.map((item, index) => {
+                  return (
+                    <CarItem
+                      item={item}
+                      index={index}
+                      key={`${item.id}${index}${item.quantity}`}
+                    />
+                  )
+                })}
               </section>
-            ) : (
-              <>
-                <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
-                  {items.map((item, index) => {
-                    return (
-                      <CarItem
-                        item={item}
-                        index={index}
-                        key={`${item.id}${index}${item.quantity}`}
-                      />
-                    )
-                  })}
-                </section>
 
-                <hr className="rounded-full my-8" />
+              <hr className="rounded-full my-8" />
 
-                <footer>
-                  <div className="flex items-center justify-between my-8">
-                    <span className="text-zinc-400 text-lg font-bold">
-                      Total
+              <footer>
+                <div className="flex items-center justify-between my-8">
+                  <span className="text-zinc-400 text-lg font-bold">Total</span>
+                  <div className="text-center">
+                    <span className="block text-white font-bold text-xl">
+                      {Number(cart.total).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
                     </span>
-                    <div className="text-center">
-                      <span className="block text-white font-bold text-xl">
-                        {Number(cart.total).toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
-                      </span>
-                      <span className="text-zinc-400 text-sm">
-                        Em 12x s/juros de{' '}
-                        {Number(cart.total / 12).toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
-                      </span>
-                    </div>
+                    <span className="text-zinc-400 text-sm">
+                      Em 12x s/juros de{' '}
+                      {Number(cart.total / 12).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
+                    </span>
                   </div>
+                </div>
 
-                  <button className="flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white w-full">
-                    Finalizar compra
-                  </button>
-                </footer>
-              </>
-            )}
-          </form>
+                <button
+                  onClick={handleFinishOrder}
+                  className="flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white w-full"
+                >
+                  Finalizar compra
+                </button>
+              </footer>
+            </>
+          )}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

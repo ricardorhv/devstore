@@ -1,5 +1,6 @@
 'use client'
 
+import { Cart } from '@/data/types/cart'
 import { ProductCart } from '@/data/types/product-cart'
 import { ShirtSizesType } from '@/data/types/shirt-sizes-type'
 import {
@@ -9,11 +10,6 @@ import {
   useEffect,
   useState,
 } from 'react'
-
-interface Cart {
-  cartItems: ProductCart[]
-  total: number
-}
 
 interface CartContextType {
   items: ProductCart[]
