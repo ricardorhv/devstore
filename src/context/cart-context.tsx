@@ -21,6 +21,7 @@ interface CartContextType {
     preChoosenSize: string,
     newSize: ShirtSizesType,
   ) => void
+  clearCart: () => void
 }
 
 interface CartProviderProps {
@@ -99,6 +100,10 @@ export function CartProvider({ children }: CartProviderProps) {
     })
   }
 
+  function clearCart() {
+    setCartItems([])
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -107,6 +112,7 @@ export function CartProvider({ children }: CartProviderProps) {
         removeItemFromCart,
         cart,
         changeShirtSize,
+        clearCart,
       }}
     >
       {children}

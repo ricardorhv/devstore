@@ -4,17 +4,15 @@ import { useCart } from '@/context/cart-context'
 import * as Dialog from '@radix-ui/react-dialog'
 import { ShoppingBag, X } from 'lucide-react'
 import { CarItem } from './cart-item'
-import { finishOrder } from '@/data/orders'
 
 export default function CartWidget() {
-  const { items, cart } = useCart()
+  const { items, cart, clearCart } = useCart()
 
   const quantityOfItemsInCart = items.length
 
-  async function handleFinishOrder() {
-    const result = await finishOrder(cart)
-
-    console.log(result)
+  function handleFinishOrder() {
+    alert('Pedido efetuado com sucesso!')
+    clearCart()
   }
 
   return (
