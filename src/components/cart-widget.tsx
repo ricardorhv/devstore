@@ -26,9 +26,9 @@ export default function CartWidget() {
 
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/90 animate-overlayShow" />
-        <Dialog.Content className="bg-zinc-900 fixed inset-y-0 right-0 w-[600px] px-8 py-6 h-full animate-cartShow data-[state=closed]:animate-cartHide">
+        <Dialog.Content className="bg-zinc-900 fixed inset-y-0 right-0 w-4/5 md:w-1/2 px-4 md:px-8 py-3 md:py-6 h-full animate-cartShow data-[state=closed]:animate-cartHide">
           <header className="flex items-start justify-between">
-            <Dialog.Title className="text-zinc-200 text-[32px] font-bold">
+            <Dialog.Title className="text-zinc-200 text-2xl md:text-3xl font-bold leading-tight">
               Sacola de compras
             </Dialog.Title>
 

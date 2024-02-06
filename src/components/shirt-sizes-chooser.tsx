@@ -23,6 +23,8 @@ export function ShirtSizesChooser({
 
   const { changeShirtSize } = useCart()
 
+  const shirtSizes: ShirtSizesType[] = ['P', 'M', 'G', 'GG']
+
   useEffect(() => {
     if (preChosenShirtSize && productId) {
       if (preChosenShirtSize !== shirtSize) {
@@ -33,7 +35,7 @@ export function ShirtSizesChooser({
         )
       }
     }
-  }, [shirtSize, preChosenShirtSize])
+  }, [shirtSize, preChosenShirtSize, productId, changeShirtSize])
 
   function handleChangeShirtSize(newShirtSize: ShirtSizesType) {
     setShirtSize(newShirtSize)
@@ -48,83 +50,32 @@ export function ShirtSizesChooser({
       <span className="block font-semibold">Tamanhos</span>
 
       <RadioGroup.Root
-        className="flex gap-2"
+        className="flex gap-2 flex-wrap"
         onValueChange={handleChangeShirtSize}
         defaultValue={shirtSize}
         name="shirtSize"
       >
-        <div
-          className={`h-9 w-14 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800 text-sm font-semibold group has-[button[data-state=checked]]:bg-violet-700 has-[button[data-state=checked]]:border-violet-700 hover:bg-zinc-900 ${
-            shirtSize !== 'P' ? styleToLowOpacity : ''
-          }`}
-        >
-          <RadioGroup.Item
-            className="hidden"
-            value="P"
-            id={formatRadioButtonId('P')}
-            data-is-any-radio-checked={isAnyRadioButtonChecked}
-          />
-          <label
-            className="w-full h-full text-center flex items-center justify-center cursor-pointer transition-colors"
-            htmlFor={formatRadioButtonId('P')}
+        {shirtSizes.map((size) => (
+          <div
+            className={`h-7 w-12 md:h-9  md:w-14 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800 text-sm font-semibold group has-[button[data-state=checked]]:bg-violet-700 has-[button[data-state=checked]]:border-violet-700 hover:bg-zinc-900 ${
+              shirtSize !== size ? styleToLowOpacity : ''
+            }`}
+            key={`${size}${index}`}
           >
-            P
-          </label>
-        </div>
-        <div
-          className={`h-9 w-14 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800 text-sm font-semibold group has-[button[data-state=checked]]:bg-violet-700 has-[button[data-state=checked]]:border-violet-700 hover:bg-zinc-900 ${
-            shirtSize !== 'M' ? styleToLowOpacity : ''
-          }`}
-        >
-          <RadioGroup.Item
-            className="hidden"
-            value="M"
-            id={formatRadioButtonId('M')}
-            data-is-any-radio-checked={isAnyRadioButtonChecked}
-          />
-          <label
-            className="w-full h-full text-center flex items-center justify-center cursor-pointer transition-colors"
-            htmlFor={formatRadioButtonId('M')}
-          >
-            M
-          </label>
-        </div>
-        <div
-          className={`h-9 w-14 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800 text-sm font-semibold group has-[button[data-state=checked]]:bg-violet-700 has-[button[data-state=checked]]:border-violet-700 hover:bg-zinc-900 ${
-            shirtSize !== 'G' ? styleToLowOpacity : ''
-          }`}
-        >
-          <RadioGroup.Item
-            className="hidden"
-            value="G"
-            id={formatRadioButtonId('G')}
-            data-is-any-radio-checked={isAnyRadioButtonChecked}
-          />
-          <label
-            className="w-full h-full text-center flex items-center justify-center cursor-pointer transition-colors"
-            htmlFor={formatRadioButtonId('G')}
-          >
-            G
-          </label>
-        </div>
-        <div
-          className={`h-9 w-14 rounded-full overflow-hidden border border-zinc-700 bg-zinc-800 text-sm font-semibold group has-[button[data-state=checked]]:bg-violet-700 has-[button[data-state=checked]]:border-violet-700 hover:bg-zinc-900 ${
-            shirtSize !== 'GG' ? styleToLowOpacity : ''
-          }`}
-        >
-          <RadioGroup.Item
-            className="hidden"
-            value="GG"
-            id={formatRadioButtonId('GG')}
-            data-is-any-radio-checked={isAnyRadioButtonChecked}
-          />
-          <label
-            className="w-full h-full text-center flex items-center justify-center cursor-pointer transition-colors"
-            htmlFor={formatRadioButtonId('GG')}
-          >
-            GG
-          </label>
-        </div>
+            <RadioGroup.Item
+              className="hidden"
+              value={size}
+              id={formatRadioButtonId(size)}
+              data-is-any-radio-checked={isAnyRadioButtonChecked}
+            />
+            <label
+              className="w-full h-full text-center flex items-center justify-center cursor-pointer transition-colors"
+              htmlFor={formatRadioButtonId(size)}
+            >
+              {size}
+            </label>
+          </div>
+        ))}
       </RadioGroup.Root>
     </>
   )

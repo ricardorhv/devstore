@@ -25,8 +25,6 @@ export default async function Search({ searchParams }: SearchProps) {
     })
     const products = await response.json()
 
-    await new Promise((resolve) => setTimeout(resolve, 10000))
-
     return products
   }
 
@@ -38,7 +36,7 @@ export default async function Search({ searchParams }: SearchProps) {
         Resultados para: <span className="font-semibold">{query}</span>
       </p>
 
-      <div className={`grid grid-rows-${products.length} md:grid-cols-3 gap-6`}>
+      <div className={`grid grid-rows-${products.length} gap-6`}>
         {products.map((product) => (
           <Link
             key={product.id}
