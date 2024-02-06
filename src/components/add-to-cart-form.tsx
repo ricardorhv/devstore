@@ -34,6 +34,8 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
         quantity: 1,
       })
     }
+
+    alert(`${product.title} foi adicionado no carrinho!`)
   }
 
   return (
