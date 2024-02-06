@@ -1,6 +1,4 @@
-import AddToCartButton from '@/components/add-to-cart-button'
 import { AddToCartForm } from '@/components/add-to-cart-form'
-import { ShirtSizesChooser } from '@/components/shirt-sizes-chooser'
 import { api } from '@/data/api'
 import { Product } from '@/data/types/product'
 import { Metadata } from 'next'
@@ -47,37 +45,9 @@ export async function generateStaticParams() {
 export default async function ProductPage({ params }: ProductProps) {
   const product = await getProduct(params.slug)
 
-  // const result = await api('/orders', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     cartItems: [
-  //       {
-  //         id: 1,
-  //         title: 'produto',
-  //         slug: 'slug',
-  //         price: 100,
-  //         image: 'imagem url',
-  //         description: 'Descrição',
-  //         featured: true,
-  //         shirtSize: 'P',
-  //         quantity: 1,
-  //         subtotal: 100,
-  //       },
-  //     ],
-  //     total: 100,
-  //   }),
-  // })
-
-  // const orders = await result.json()
-
-  // console.log(orders)
-
   return (
-    <div className="relative grid max-h-[860px] grid-cols-3">
-      <div className="col-span-2 overflow-hidden">
+    <div className="relative grid lg:max-h-[860px] grid-cols-3 gap-4 lg:gap-0">
+      <div className="col-span-3 lg:col-span-2 overflow-hidden">
         <Image
           src={product.image}
           alt=""
@@ -87,7 +57,7 @@ export default async function ProductPage({ params }: ProductProps) {
         />
       </div>
 
-      <div className="flex flex-col justify-center px-12">
+      <div className="col-span-3 lg:col-span-1 flex flex-col justify-center lg:px-12">
         <h1 className="text-2xl font-bold leading-tight">{product.title}</h1>
 
         <p className="mt-2 leading-relaxed text-zinc-400">
@@ -115,6 +85,5 @@ export default async function ProductPage({ params }: ProductProps) {
         <AddToCartForm product={product} />
       </div>
     </div>
-    // <pre>{JSON.stringify(orders, null, 2)}</pre>
   )
 }
