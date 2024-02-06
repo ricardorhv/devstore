@@ -14,7 +14,31 @@
 
 ### A little about the project 💻
 
-<img src='./github/tour.gif'/>
+<img src='./.github/preview.png'/>
+
+<br>
+
+---
+
+### Searching for a product 🔍
+
+<img src='./.github/GIFs/search-product-video.gif'/>
+
+<br>
+
+---
+
+### Add a product to the cart 🛒
+
+<img src='./.github/GIFs/add-product-to-the-cart.gif'/>
+
+<br>
+
+---
+
+### Remove a product from the cart 🛒
+
+<img src='./.github/GIFs/remove-product-from-the-cart.gif'/>
 
 <br>
 
