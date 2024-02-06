@@ -11,13 +11,13 @@ export default function SearchLoading() {
         <CurrentSearch />
       </Suspense>
 
-      <div className="grid grid-rows-6 gap-6">
-        <Skeleton className="h-[600px]" />
-        <Skeleton className="h-[600px]" />
-        <Skeleton className="h-[600px]" />
-        <Skeleton className="h-[600px]" />
-        <Skeleton className="h-[600px]" />
-        <Skeleton className="h-[600px]" />
+      <div className="grid grid-rows-6 md:grid-cols-3 gap-6">
+        <Skeleton className="h-[600px] md:h-[300px]" />
+        <Skeleton className="h-[600px] md:h-[300px]" />
+        <Skeleton className="h-[600px] md:h-[300px]" />
+        <Skeleton className="h-[600px] md:h-[300px]" />
+        <Skeleton className="h-[600px] md:h-[300px]" />
+        <Skeleton className="h-[600px] md:h-[300px]" />
       </div>
     </div>
   )

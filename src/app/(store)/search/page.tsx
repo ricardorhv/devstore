@@ -25,6 +25,8 @@ export default async function Search({ searchParams }: SearchProps) {
     })
     const products = await response.json()
 
+    await new Promise((resolve) => setTimeout(resolve, 10000))
+
     return products
   }
 
