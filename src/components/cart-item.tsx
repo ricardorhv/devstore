@@ -21,7 +21,7 @@ export function CarItem({ item, index }: CartItemProps) {
   }
 
   function handleRemoveItem() {
-    removeItemFromCart(item.id)
+    removeItemFromCart(item.id, item.shirtSize)
   }
 
   return (

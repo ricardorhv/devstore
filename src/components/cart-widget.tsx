@@ -6,9 +6,9 @@ import { ShoppingBag, X } from 'lucide-react'
 import { CarItem } from './cart-item'
 
 export default function CartWidget() {
-  const { items, cart, clearCart } = useCart()
+  const { cart, clearCart } = useCart()
 
-  const quantityOfItemsInCart = items.length
+  const quantityOfItemsInCart = cart.cartItems?.length
 
   function handleFinishOrder() {
     alert('Pedido efetuado com sucesso!')
@@ -41,7 +41,7 @@ export default function CartWidget() {
 
           <hr className="rounded-full mt-5 mb-8" />
 
-          {items.length === 0 ? (
+          {cart.cartItems?.length === 0 ? (
             <section className="w-full h-full flex flex-col items-center justify-center gap-5">
               <span className="font-bold text-2xl text-zinc-500 mb-16">
                 Seu carrinho está vazio!
@@ -50,7 +50,7 @@ export default function CartWidget() {
           ) : (
             <>
               <section className="h-1/2 overflow-y-scroll divide-y divide-zinc-700">
-                {items.map((item, index) => {
+                {cart.cartItems?.map((item, index) => {
                   return (
                     <CarItem
                       item={item}

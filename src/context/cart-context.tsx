@@ -15,10 +15,10 @@ interface CartContextType {
   items: ProductCart[]
   cart: Cart
   addToCart: (product: ProductCart) => void
-  removeItemFromCart: (productId: number) => void
+  removeItemFromCart: (productId: number, shirtSize: ShirtSizesType) => void
   changeShirtSize: (
     productId: number,
-    preChoosenSize: string,
+    preChosenSize: ShirtSizesType,
     newSize: ShirtSizesType,
   ) => void
   clearCart: () => void
@@ -38,6 +38,8 @@ export function CartProvider({ children }: CartProviderProps) {
     const total = cartItems.reduce((acc, item) => {
       return acc + (item.subtotal || 1)
     }, 0)
+    console.log(cartItems)
+
     setCart({ cartItems, total })
   }, [cartItems])
 
@@ -50,7 +52,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
       if (productInCart) {
         return prevState.map((item) => {
-          if (item.id === product.id) {
+          if (item.id === product.id && item.shirtSize === product.shirtSize) {
             const newQuantity = item.quantity + 1
 
             return {
@@ -75,29 +77,62 @@ export function CartProvider({ children }: CartProviderProps) {
     })
   }
 
-  function removeItemFromCart(productId: number) {
+  function removeItemFromCart(productId: number, shirtSize: ShirtSizesType) {
+    setCartItems((prevState) =>
+      prevState.filter(
+        (item) =>
+          item.id !== productId ||
+          (item.id === productId && item.shirtSize !== shirtSize),
+      ),
+    )
+  }
+
+  function verifyIfExistsTheSameProductWithTheSameNewSize(
+    productId: number,
+    newSize: ShirtSizesType,
+  ) {
+    return cartItems.some(
+      (item) => item.id === productId && item.shirtSize === newSize,
+    )
+  }
+
+  function increaseTheQuantity(productId: number) {
     setCartItems((prevState) => {
-      return prevState.filter((item) => item.id !== productId)
+      return prevState.map((item) => {
+        if (item.id === productId) {
+          const newQuantity = item.quantity + 1
+          return {
+            ...item,
+            quantity: newQuantity,
+            subtotal: item.price * newQuantity,
+          }
+        }
+        return item
+      })
     })
   }
 
   function changeShirtSize(
     productId: number,
-    preChosenSize: string,
+    preChosenSize: ShirtSizesType,
     newSize: ShirtSizesType,
   ) {
-    setCartItems((prevState) => {
-      return prevState.map((item) => {
-        if (item.id === productId && item.shirtSize === preChosenSize) {
-          return {
-            ...item,
-            shirtSize: newSize,
+    if (verifyIfExistsTheSameProductWithTheSameNewSize(productId, newSize)) {
+      removeItemFromCart(productId, preChosenSize)
+      increaseTheQuantity(productId)
+    } else {
+      setCartItems((prevState) => {
+        return prevState.map((item) => {
+          if (item.id === productId && item.shirtSize === preChosenSize) {
+            return {
+              ...item,
+              shirtSize: newSize,
+            }
           }
-        }
-
-        return item
+          return item
+        })
       })
-    })
+    }
   }
 
   function clearCart() {

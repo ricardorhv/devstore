@@ -26,19 +26,17 @@ export function ShirtSizesChooser({
   const shirtSizes: ShirtSizesType[] = ['P', 'M', 'G', 'GG']
 
   useEffect(() => {
-    if (preChosenShirtSize && productId) {
-      if (preChosenShirtSize !== shirtSize) {
-        changeShirtSize(
-          productId,
-          preChosenShirtSize,
-          shirtSize as ShirtSizesType,
-        )
-      }
+    if (preChosenShirtSize) {
+      setShirtSize(preChosenShirtSize)
     }
-  }, [shirtSize, preChosenShirtSize, productId, changeShirtSize])
+  }, [preChosenShirtSize])
 
   function handleChangeShirtSize(newShirtSize: ShirtSizesType) {
     setShirtSize(newShirtSize)
+
+    if (preChosenShirtSize && productId) {
+      changeShirtSize(productId, preChosenShirtSize, newShirtSize)
+    }
   }
 
   function formatRadioButtonId(size: ShirtSizesType) {
@@ -67,6 +65,7 @@ export function ShirtSizesChooser({
               value={size}
               id={formatRadioButtonId(size)}
               data-is-any-radio-checked={isAnyRadioButtonChecked}
+              checked={shirtSize === size}
             />
             <label
               className="w-full h-full text-center flex items-center justify-center cursor-pointer transition-colors"

@@ -33,9 +33,8 @@ export function AddToCartForm({ product }: AddToCartFormProps) {
         shirtSize,
         quantity: 1,
       })
+      alert(`${product.title} foi adicionado no carrinho!`)
     }
-
-    alert(`${product.title} foi adicionado no carrinho!`)
   }
 
   return (
